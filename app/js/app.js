@@ -7,8 +7,7 @@ angular.module('myApp', [
     'myApp.filters',
     'myApp.services',
     'myApp.directives',
-    'myApp.controllers',
-    'LocalStorageModule'
+    'myApp.controllers'
 ]).
 config(['$routeProvider',
     function($routeProvider) {
