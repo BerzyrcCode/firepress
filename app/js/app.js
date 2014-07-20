@@ -2,11 +2,11 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('myApp', [
+angular.module('firepress', [
     'ngRoute',
     'myApp.filters',
     'myApp.services',
-    'myApp.directives',
+    'firepress.directives',
     'myApp.controllers'
 ]).
 config(['$routeProvider',
@@ -20,7 +20,7 @@ config(['$routeProvider',
             controller: 'MyCtrl2'
         });
         $routeProvider.otherwise({
-            redirectTo: '/view1'
+            redirectTo: '/'
         });
     }
 ]);
