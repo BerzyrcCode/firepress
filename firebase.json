@@ -1,0 +1,9 @@
+{
+  "firebase": "cmsfirepress",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

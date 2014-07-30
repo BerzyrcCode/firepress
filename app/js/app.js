@@ -1,26 +1,45 @@
 'use strict';
+// Replace the <textarea id="editor1"> with a CKEditor
+// instance, using default configuration.
 
 
 // Declare app level module which depends on filters, and services
 angular.module('firepress', [
-    'ngRoute',
+    'ui.router',
     'myApp.filters',
     'myApp.services',
     'firepress.directives',
     'myApp.controllers'
 ]).
-config(['$routeProvider',
-    function($routeProvider) {
-        $routeProvider.when('/view1', {
-            templateUrl: 'partials/partial1.html',
-            controller: 'MyCtrl1'
+config(['$stateProvider', '$urlRouterProvider',
+    function($stateProvider, $urlRouterProvider) {
+        $stateProvider.state('page', {
+            url: '/:page',
+            templateUrl: 'pages/mainTemplate.html',
+            controller: 'pageCtrl'
         });
-        $routeProvider.when('/view2', {
-            templateUrl: 'partials/partial2.html',
-            controller: 'MyCtrl2'
-        });
-        $routeProvider.otherwise({
-            redirectTo: '/'
-        });
+        $stateProvider.state('edit', {
+            url: '/:page/edit',
+            templateUrl: 'pages/mainTemplateEdit.html',
+            controller: 'editCtrl'
+        })
+        $stateProvider.state('main', {
+            url: '/',
+            controller: function($scope, $location) {
+                $location.path('/Home').replace();
+            }
+        })
+        $stateProvider.state('404', {
+            url: '/404',
+            templateUrl: 'pages/mainTemplate.Html',
+            controller: function($scope) {
+
+            }
+        })
+        $urlRouterProvider.otherwise(
+            '/Home'
+        );
+
+
     }
 ]);

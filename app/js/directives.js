@@ -1,8 +1,5 @@
 'use strict';
-
 /* Directives */
-
-
 angular.module('firepress.directives', [
     'LocalStorageModule',
     'firebase'
@@ -14,8 +11,8 @@ directive('appVersion', ['version',
         };
     }
 ]).
-directive('firepressLogin', ['$firebase', '$firebaseSimpleLogin', '$rootScope', 'localStorageService',
-    function($firebase, $firebaseSimpleLogin, $rootScope, localStorageService) {
+directive('firepressLogin', ['$firebase', '$firebaseSimpleLogin', '$rootScope', 'localStorageService', 'firebase_root',
+    function($firebase, $firebaseSimpleLogin, $rootScope, localStorageService, firebase_root) {
         return {
             restrict: 'AE',
             template: [
@@ -26,7 +23,7 @@ directive('firepressLogin', ['$firebase', '$firebaseSimpleLogin', '$rootScope', 
                 '<button style="margin-left:2px" type="button" class="btn btn-primary" ng-click="LogintoFirepress()">Login</button>',
                 '</span>',
                 '<span ng-hide="show">{{user.email}} ',
-                '<a href="#" style="margin-left:2px" class="btn btn-warning" ng-click="loginObj.$logout()">Logout</a>',
+                '<a href="#" style="margin-left:2px" class="btn btn-warning" ng-click="LogoutFirepress()">Logout</a>',
                 '</span>',
                 '</form>'
             ].join(""),
@@ -49,9 +46,13 @@ directive('firepressLogin', ['$firebase', '$firebaseSimpleLogin', '$rootScope', 
                         console.error('Login failed: ', error);
                     });
                 }
+                $scope.LogoutFirepress = function() {
+                    localStorageService.remove('FirepressUser');
+                    $scope.loginObj.$logout();
+                    $scope.user = null;
+                    $scope.show = true;
+                }
             }
-
-
         };
     }
 ]);
