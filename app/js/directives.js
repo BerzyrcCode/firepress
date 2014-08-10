@@ -24,7 +24,10 @@ directive('firepressLogin', ['$firebase', '$firebaseSimpleLogin', '$rootScope', 
                 '</span>',
                 '<span ng-hide="show">{{user.email}} ',
                 '<a href="#" style="margin-left:2px" class="btn btn-warning" ng-click="LogoutFirepress()">Logout</a>',
-                '</span>',
+                '</span><br>',
+                '<span class="form-group" ng-show="show">',
+                '<label>Remember Me',
+                '<input type="checkbox" class="form-control" ng-model="rembmerme" /></label></span>',
                 '</form>'
             ].join(""),
             scope: true,
@@ -36,7 +39,8 @@ directive('firepressLogin', ['$firebase', '$firebaseSimpleLogin', '$rootScope', 
                 $scope.LogintoFirepress = function() {
                     $scope.loginObj.$login('password', {
                         email: $scope.user.username,
-                        password: $scope.user.password
+                        password: $scope.user.password,
+                        rememeberMe: $scope.rememberme
                     }).then(function(user) {
                         localStorageService.set('FirepressUser', user);
                         $scope.user = user;

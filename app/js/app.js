@@ -37,7 +37,7 @@ config(['$stateProvider', '$urlRouterProvider',
             }
         })
         $urlRouterProvider.otherwise(
-            '/Home'
+            '/'
         );
 
 

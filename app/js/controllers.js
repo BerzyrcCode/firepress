@@ -6,8 +6,8 @@ angular.module('myApp.controllers', ['LocalStorageModule', 'firebase', 'ngCkedit
     .controller('pageCtrl', ['$scope', '$firebase', 'firebase_root', '$stateParams',
         function($scope, $firebase, firebase_root, $stateParams) {
             var ref = new Firebase(firebase_root + '/pages/' + $stateParams.page);
-            var promise = $firebase(ref);
-            promise.$on("loaded", function() {
+            var promise = $firebase(ref).$asObject();
+            promise.$loaded(function() {
                 $scope.pages = promise;
                 angular.element('#content').html($scope.pages.content);
             })
@@ -16,15 +16,15 @@ angular.module('myApp.controllers', ['LocalStorageModule', 'firebase', 'ngCkedit
     .controller('editCtrl', ['$scope', '$firebase', 'firebase_root', '$stateParams', '$sce',
         function($scope, $firebase, firebase_root, $stateParams, $sce) {
             var ref = new Firebase(firebase_root + '/pages/' + $stateParams.page);
-            var promise = $firebase(ref);
-            promise.$on("loaded", function() {
+            var promise = $firebase(ref).$asObject();
+            promise.$loaded(function() {
                 $scope.pages = promise;
-                angular.element('#content').html($scope.pages.content);
+                //angular.element('#content').html($scope.pages.content);
                 $scope.deliberatelyTrustDangerousSnippet = function() {
                     return $sce.trustAsHtml($scope.pages.content);
                 };
                 $scope.save = function() {
-                    $scope.pages.$save('content');
+                    $scope.pages.$save();
 
                 }
             })
@@ -64,8 +64,7 @@ angular.module('myApp.controllers', ['LocalStorageModule', 'firebase', 'ngCkedit
                         items: ['PageBreak', 'Source']
                     }
                 ],
-                language: 'en',
-                uiColor: '#000000'
+                language: 'en'
             };
 
         }
@@ -73,19 +72,11 @@ angular.module('myApp.controllers', ['LocalStorageModule', 'firebase', 'ngCkedit
     .controller('IndexCtrl', ['$scope', 'localStorageService', 'firebase_root', '$firebase',
         function($scope, localStorageService, firebase_root, $firebase) {
             var ref = new Firebase(firebase_root + '/pages');
-            var promise = $firebase(ref);
-            promise.$on("loaded", function() {
-                $scope.pages = promise
-                $scope.links = [];
-                angular.forEach($scope.pages, function(key, value) {
-                    if (typeof(key) === 'object') {
-                        $scope.links.push(key);
-                        console.log(key);
-                        console.log(value);
-                    }
+            var promise = $firebase(ref).$asArray();
+            promise.$loaded(function() {
 
+                $scope.links = promise;
 
-                })
                 $scope.order = "order";
             })
 

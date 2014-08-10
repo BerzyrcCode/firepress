@@ -1,6 +1,8 @@
 <div firepress-login></div>
-<h1>{{pages.title}}</h1>
 
 
-<div contenteditable="true" ckeditor="editorOptions" ng-model="pages.content" ng-blur="save(pages.content)"></div>
-d
+<h1 contenteditable="true" ckeditor="editorOptions" ng-model="pages.title" ng-blur="save()">{{pages.title}}</h1>
+
+
+<div contenteditable="true" ckeditor="editorOptions" ng-model="pages.content" ng-blur="save()">{{pages.content}}</div>
+
