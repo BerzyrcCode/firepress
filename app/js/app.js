@@ -13,6 +13,14 @@ angular.module('firepress', [
 ]).
 config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
+        $stateProvider.state('main', {
+            url: '/',
+            templateUrl: 'pages/index.html'
+        })
+        $stateProvider.state('admin',{
+            url:"/admin",
+            templateUrl: 'firepress/admin.html'
+        })
         $stateProvider.state('page', {
             url: '/:page',
             templateUrl: 'pages/mainTemplate.html',
@@ -23,19 +31,7 @@ config(['$stateProvider', '$urlRouterProvider',
             templateUrl: 'pages/mainTemplateEdit.html',
             controller: 'editCtrl'
         })
-        $stateProvider.state('main', {
-            url: '/',
-            controller: function($scope, $location) {
-                $location.path('/Home').replace();
-            }
-        })
-        $stateProvider.state('404', {
-            url: '/404',
-            templateUrl: 'pages/mainTemplate.Html',
-            controller: function($scope) {
-
-            }
-        })
+        
         $urlRouterProvider.otherwise(
             '/'
         );

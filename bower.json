@@ -1,7 +1,7 @@
 {
-    "name": "angular-seed",
+    "name": "firepress",
     "description": "A starter project for AngularJS",
-    "version": "0.0.0",
+    "version": "1.0.1",
     "homepage": "https://github.com/angular/angular-seed",
     "license": "MIT",
     "private": true,
@@ -12,7 +12,7 @@
         "angular-mocks": "~1.2.x",
         "html5-boilerplate": "~4.3.0",
         "angular-ui-router": "~0.2.10",
-        "angularFire": "0.7.1",
+        "angularFire": "0.8.1",
         "firebase-bower": "1.0.17",
         "angular-local-storage": "latest",
         "angular-ui-tinymce": "latest"
